@@ -1,7 +1,6 @@
 #include "Player.h"
 
-
-Player::Player(GameMechs* thisGMRef)
+Player::Player(GameMechs *thisGMRef)
 {
     mainGameMechsRef = thisGMRef;
     myDir = STOP;
@@ -12,7 +11,6 @@ Player::Player(GameMechs* thisGMRef)
     playerPos.symbol = '*';
 }
 
-
 Player::~Player()
 {
     // delete any heap members here
@@ -20,12 +18,12 @@ Player::~Player()
 
 objPos Player::getPlayerPos() const
 {
-    // return the reference to the playerPos arrray list
+    // return the reference to the playerPos array list
 }
 
 void Player::updatePlayerDir()
 {
-        // PPA3 input processing logic          
+    // PPA3 input processing logic
 }
 
 void Player::movePlayer()
