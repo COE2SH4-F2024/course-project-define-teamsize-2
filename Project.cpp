@@ -48,6 +48,7 @@ void Initialize(void)
     for (int i=0; i<5;i++){
         object[i]=objPos(i+1,i+1,65+i);
     }
+
 }
 
 void GetInput(void)
