@@ -2,12 +2,12 @@
 
 GameMechs::GameMechs()
 {
-    boardSizeX = 30;
-    boardSizeY = 15;
-    exitFlag = 0;
-    loseFlag = 0;
+    boardSizeX = 15;
+    boardSizeY = 30;
+    exitFlag = false;
+    loseFlag = false;
     score = 0;
-    input = NULL;
+    input = '\0';
 
 }
 
@@ -15,10 +15,10 @@ GameMechs::GameMechs(int boardX, int boardY)
 {
     boardSizeX = boardX;
     boardSizeY = boardY;
-    exitFlag = 0;
-    loseFlag = 0;
+    exitFlag = false;
+    loseFlag = false;
     score = 0;
-    input = NULL;
+    input = '\0';
 }
 
 // do you need a destructor?
@@ -63,12 +63,12 @@ int GameMechs::getBoardSizeY() const
 
 void GameMechs::setExitTrue()
 {
-    exitFlag = 1;
+    exitFlag = true;
 }
 
 void GameMechs::setLoseFlag()
 {
-    loseFlag = 1;
+    loseFlag = true;
 }
 
 void GameMechs::setInput(char this_input)
@@ -78,7 +78,8 @@ void GameMechs::setInput(char this_input)
 
 void GameMechs::clearInput()
 {
-    input = NULL;
+    if (input!='\0')
+        input = '\0';
 }
 
 // More methods should be added here
