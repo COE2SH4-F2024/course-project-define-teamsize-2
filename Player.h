@@ -23,9 +23,9 @@ public:
         STOP
     }; // This is the direction state
 
-        Player(GameMechs* thisGMRef);
-        Player();
-        ~Player();
+    Player(GameMechs *thisGMRef);
+    Player();
+    ~Player();
 
     objPos getPlayerPos() const; // Upgrade this in iteration 3.
     void updatePlayerDir();
