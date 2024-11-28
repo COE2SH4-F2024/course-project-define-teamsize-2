@@ -44,7 +44,7 @@ void Initialize(void)
 void GetInput(void)
 {
     if (MacUILib_hasChar() != 0){
-        gameMechs->setInput(MacUILib_getChar());
+        mainGameMechsRef->setInput(MacUILib_getChar());
     }
   
     
