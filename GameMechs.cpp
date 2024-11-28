@@ -2,13 +2,12 @@
 
 GameMechs::GameMechs()
 {
-    boardSizeX = 15;
-    boardSizeY = 30;
+    boardSizeX = 30;
+    boardSizeY = 15;
     exitFlag = false;
     loseFlag = false;
     score = 0;
     input = '\0';
-
 }
 
 GameMechs::GameMechs(int boardX, int boardY)
@@ -78,7 +77,7 @@ void GameMechs::setInput(char this_input)
 
 void GameMechs::clearInput()
 {
-    if (input!='\0')
+    if (input != '\0')
         input = '\0';
 }
 
