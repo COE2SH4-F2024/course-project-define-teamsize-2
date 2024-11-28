@@ -83,3 +83,10 @@ void GameMechs::clearInput()
 }
 
 // More methods should be added here
+void GameMechs::generateFood(objPos blockoff){
+
+}
+
+objPos GameMechs::getFoodPos() const{
+    return food;
+}

@@ -62,7 +62,6 @@ void GetInput(void)
     if (MacUILib_hasChar() != 0){
         gameMechs->setInput(MacUILib_getChar());
     }
-    MacUILib_printf("%d",gameMechs->getExitFlagStatus());
     
 }
 
