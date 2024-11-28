@@ -57,15 +57,15 @@ void DrawScreen(void)
 {
     MacUILib_clearScreen();
 
-    for (int i = 0; i < mainGameMechsRef->getBoardSizeX(); i++)
+    for (int i = 0; i < mainGameMechsRef->getBoardSizeY(); i++)
     {
-        for (int j = 0; j < mainGameMechsRef->getBoardSizeY(); j++)
+        for (int j = 0; j < mainGameMechsRef->getBoardSizeX(); j++)
         {
-            if (i == 0 || i == mainGameMechsRef->getBoardSizeX() - 1 || j == 0 || j == mainGameMechsRef->getBoardSizeY() - 1)
+            if (i == 0 || i == mainGameMechsRef->getBoardSizeY() - 1 || j == 0 || j == mainGameMechsRef->getBoardSizeX() - 1)
             {
                 MacUILib_printf("%c", '#');
             }
-            else if (i == player->getPlayerPos().pos->x && j == player->getPlayerPos().pos->y)
+            else if (i == player->getPlayerPos().pos->y && j == player->getPlayerPos().pos->x)
             {
                 MacUILib_printf("%c", player->getPlayerPos().symbol);
             }
