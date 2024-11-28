@@ -40,6 +40,7 @@ objPos &objPos::operator=(const objPos &d)
         pos->y = d.pos->y;
         symbol = d.symbol;
     }
+
     return *this;
 }
 
@@ -60,6 +61,7 @@ void objPos::setObjPos(int xPos, int yPos, char sym)
 objPos objPos::getObjPos() const
 {
     objPos returnPos;
+
     returnPos.pos->x = pos->x;
     returnPos.pos->y = pos->y;
     returnPos.symbol = symbol;
