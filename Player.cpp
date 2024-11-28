@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <iostream>
 
 Player::Player(GameMechs *thisGMRef)
 {
@@ -29,7 +30,7 @@ void Player::updatePlayerDir()
 {
     // PPA3 input processing logic
 
-    if (mainGameMechsRef->getInput() != 0)
+    if (mainGameMechsRef->getInput() != '\0')
     {
         switch (mainGameMechsRef->getInput())
         {
@@ -61,7 +62,7 @@ void Player::updatePlayerDir()
             break;
         }
 
-        mainGameMechsRef->setInput(0);
+        mainGameMechsRef->clearInput();
     }
 }
 
