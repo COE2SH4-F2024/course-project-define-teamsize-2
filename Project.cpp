@@ -39,6 +39,7 @@ void Initialize(void)
     MacUILib_clearScreen();
 
     mainGameMechsRef->getExitFlagStatus() == false;
+    mainGameMechsRef->generateFood(player->getPlayerPos());
 }
 
 void GetInput(void)
@@ -71,6 +72,10 @@ void DrawScreen(void)
             else if (i == player->getPlayerPos().pos->y && j == player->getPlayerPos().pos->x)
             {
                 MacUILib_printf("%c", player->getPlayerPos().symbol);
+            }
+            else if (i == mainGameMechsRef->getFoodPos().pos->y && j == mainGameMechsRef->getFoodPos().pos->x)
+            {
+                MacUILib_printf("%c", mainGameMechsRef->getFoodPos().symbol);
             }
             else
             {

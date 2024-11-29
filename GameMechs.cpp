@@ -1,5 +1,7 @@
 #include "GameMechs.h"
 
+#include <time.h>
+
 GameMechs::GameMechs()
 {
     boardSizeX = 30;
@@ -83,7 +85,18 @@ void GameMechs::clearInput()
 
 // More methods should be added here
 void GameMechs::generateFood(objPos blockoff){
+    srand(time(NULL));
 
+    int randX, randY;
+
+    do{
+        randX = (rand() % (boardSizeX-2))+1;
+        randY = (rand() % (boardSizeY-2))+1;
+    } while (randX == blockoff.pos->x && randY == blockoff.pos->y);
+
+    food.pos->x = randX;
+    food.pos->y = randY;
+    food.symbol = 'F';
 }
 
 objPos GameMechs::getFoodPos() const{

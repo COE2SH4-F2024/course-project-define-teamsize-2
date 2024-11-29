@@ -59,6 +59,9 @@ void Player::updatePlayerDir()
                 myDir = RIGHT;
             break;
 
+        case 'f': //debug key
+            mainGameMechsRef->generateFood(playerPos);
+
         default:
             break;
         }
