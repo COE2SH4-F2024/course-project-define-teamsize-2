@@ -5,7 +5,6 @@
 
 using namespace std;
 
-
 // WARNING!!  This test suite does not contain any test cases for accessing elements out-of-bound.
 //
 // You must deploy exception throwing for all out-of-bound accesses.
@@ -23,21 +22,18 @@ void tearDown(bool result);
 int testReady = true;
 // ******************* //
 
-
-
-
 // Test Case 1 - Constructor Tester
 // - Will require you to implement getSize() and getElement() methods.
 void testConstructor()
 {
 	printf("\n=== testConstructor() ===\n");
-	bool result = true; // true;	
+	bool result = true; // true;
 
 	objPos zeroPos, currentPos;
 	objPosArrayList thisList;
 	int expectedSize = 0;
 	int actualSize = thisList.getSize();
-	
+
 	// First check the list size
 	result &= assert_equal(expectedSize, actualSize);
 
@@ -45,7 +41,7 @@ void testConstructor()
 	bool actualCheck;
 
 	// Then check all elements in the array are zero-initialized via objPos() default constructor
-	for(int i = 0; i < ARRAY_MAX_CAP; i++)
+	for (int i = 0; i < ARRAY_MAX_CAP; i++)
 	{
 		currentPos = thisList.getElement(i);
 		actualCheck = zeroPos.isPosEqual(&currentPos);
@@ -58,16 +54,15 @@ void testConstructor()
 	tearDown(result);
 }
 
-
-// Test Case 2a - insertHead 1 Element 
+// Test Case 2a - insertHead 1 Element
 // - Will require you to implement getHeadElement(), getTailElement(), and getElement() methods.
 void testInsertHead_1Element()
 {
 	printf("\n=== testInsertHead_1Element() ===\n");
-	bool result = true; // true;	
+	bool result = true; // true;
 
 	objPos currentPos;
-	objPos samplePos(2, 5, 'a');  
+	objPos samplePos(2, 5, 'a');
 
 	// Insert 1 sample element
 	objPosArrayList thisList;
@@ -75,7 +70,7 @@ void testInsertHead_1Element()
 
 	int expectedSize = 1;
 	int actualSize = thisList.getSize();
-		
+
 	// First check the list size is 1
 	result &= assert_equal(expectedSize, actualSize);
 
@@ -88,13 +83,11 @@ void testInsertHead_1Element()
 
 	result &= assert_equal(expectedCheck, actualCheck);
 
-
 	// Next, check whether the tail element is also the head element in a list of 1 element.
 	currentPos = thisList.getTailElement();
 	actualCheck = samplePos.isPosEqual(&currentPos);
 
 	result &= assert_equal(expectedCheck, actualCheck);
-
 
 	// Finally, chech whether the element at index = 0 is also the head element in a list of 1 element
 	// Then check whether the head element is what we have inserted.
@@ -108,15 +101,15 @@ void testInsertHead_1Element()
 	tearDown(result);
 }
 
-// Test Case 2b - insertHead 5 Element 
+// Test Case 2b - insertHead 5 Element
 // - Will require you to implement getHeadElement() and getTailElement() method.
 void testInsertHead_5Element()
 {
 	printf("\n=== testInsertHead_5Element() ===\n");
-	bool result = true; // true;	
+	bool result = true; // true;
 
 	objPos currentPos;
-	objPos bodyPos(2, 5, 'a');  
+	objPos bodyPos(2, 5, 'a');
 	objPos headPos(3, 3, 'm');
 
 	// Insert 4 body elements, then 1 unique head element
@@ -129,7 +122,7 @@ void testInsertHead_5Element()
 
 	int expectedSize = 5;
 	int actualSize = thisList.getSize();
-		
+
 	// Confirm the list size is now 5
 	result &= assert_equal(expectedSize, actualSize);
 
@@ -143,12 +136,12 @@ void testInsertHead_5Element()
 	result &= assert_equal(expectedCheck, actualCheck);
 
 	// Next, chech the body elements at index 1, 2, and 3.
-	for(int i = 1; i < actualSize - 1; i++)
+	for (int i = 1; i < actualSize - 1; i++)
 	{
 		currentPos = thisList.getElement(i);
 		actualCheck = bodyPos.isPosEqual(&currentPos);
 
-		result &= assert_equal(expectedCheck, actualCheck);	
+		result &= assert_equal(expectedCheck, actualCheck);
 	}
 
 	// Finally, check the tail element is the body element
@@ -161,16 +154,14 @@ void testInsertHead_5Element()
 	tearDown(result);
 }
 
-
-
-// Test Case 3a - insertTail 1 Element 
+// Test Case 3a - insertTail 1 Element
 void testInsertTail_1Element()
 {
 	printf("\n=== testInsertTail_1Element() ===\n");
-	bool result = true; // true;	
+	bool result = true; // true;
 
 	objPos currentPos;
-	objPos samplePos(2, 5, 'a');  
+	objPos samplePos(2, 5, 'a');
 
 	// Insert 1 sample element
 	objPosArrayList thisList;
@@ -178,7 +169,7 @@ void testInsertTail_1Element()
 
 	int expectedSize = 1;
 	int actualSize = thisList.getSize();
-		
+
 	// First check the list size is 1
 	result &= assert_equal(expectedSize, actualSize);
 
@@ -191,13 +182,11 @@ void testInsertTail_1Element()
 
 	result &= assert_equal(expectedCheck, actualCheck);
 
-
 	// Next, check whether the tail element is also the head element in a list of 1 element.
 	currentPos = thisList.getTailElement();
 	actualCheck = samplePos.isPosEqual(&currentPos);
 
 	result &= assert_equal(expectedCheck, actualCheck);
-
 
 	// Finally, chech whether the element at index = 0 is also the head element in a list of 1 element
 	// Then check whether the head element is what we have inserted.
@@ -211,14 +200,14 @@ void testInsertTail_1Element()
 	tearDown(result);
 }
 
-// Test Case 3b - insertTail 5 Element 
+// Test Case 3b - insertTail 5 Element
 void testInsertTail_5Element()
 {
 	printf("\n=== testInsertTail_5Element() ===\n");
 	bool result = true; // true;
 
 	objPos currentPos;
-	objPos bodyPos(2, 5, 'a');  
+	objPos bodyPos(2, 5, 'a');
 	objPos tailPos(3, 3, 'm');
 
 	// Insert 4 body elements, then 1 unique head element
@@ -231,7 +220,7 @@ void testInsertTail_5Element()
 
 	int expectedSize = 5;
 	int actualSize = thisList.getSize();
-		
+
 	// Confirm the list size is now 5
 	result &= assert_equal(expectedSize, actualSize);
 
@@ -245,12 +234,12 @@ void testInsertTail_5Element()
 	result &= assert_equal(expectedCheck, actualCheck);
 
 	// Next, chech the body elements at index 1, 2, and 3.
-	for(int i = 1; i < actualSize - 1; i++)
+	for (int i = 1; i < actualSize - 1; i++)
 	{
 		currentPos = thisList.getElement(i);
 		actualCheck = bodyPos.isPosEqual(&currentPos);
 
-		result &= assert_equal(expectedCheck, actualCheck);	
+		result &= assert_equal(expectedCheck, actualCheck);
 	}
 
 	// Finally, check the tail element is the body element
@@ -264,7 +253,6 @@ void testInsertTail_5Element()
 	tearDown(result);
 }
 
-
 // Test Case 4a - removeHead from 1 Element List
 void testRemoveHead_1Element()
 {
@@ -272,7 +260,7 @@ void testRemoveHead_1Element()
 	bool result = true; // true;
 
 	objPos currentPos;
-	objPos samplePos(2, 5, 'a');  
+	objPos samplePos(2, 5, 'a');
 
 	// Insert 1 sample element
 	objPosArrayList thisList;
@@ -282,7 +270,7 @@ void testRemoveHead_1Element()
 
 	int expectedSize = 0;
 	int actualSize = thisList.getSize();
-		
+
 	result &= assert_equal(expectedSize, actualSize);
 	// The destructor will be called automatically for stack-allocated objects
 
@@ -296,7 +284,7 @@ void testRemoveHead_5Element()
 	bool result = true; // true;
 
 	objPos currentPos;
-	objPos bodyPos(2, 5, 'a');  
+	objPos bodyPos(2, 5, 'a');
 	objPos headPos(3, 3, 'm');
 
 	// Insert 4 body elements, then 1 unique head element
@@ -308,10 +296,10 @@ void testRemoveHead_5Element()
 	thisList.insertHead(headPos);
 
 	thisList.removeHead();
-	
+
 	int expectedSize = 4;
 	int actualSize = thisList.getSize();
-		
+
 	// Confirm the list size is now 4
 	result &= assert_equal(expectedSize, actualSize);
 
@@ -325,12 +313,12 @@ void testRemoveHead_5Element()
 	result &= assert_equal(expectedCheck, actualCheck);
 
 	// Next, the rest of the elements are still common elements
-	for(int i = 1; i < actualSize; i++)
+	for (int i = 1; i < actualSize; i++)
 	{
 		currentPos = thisList.getElement(i);
 		actualCheck = bodyPos.isPosEqual(&currentPos);
 
-		result &= assert_equal(expectedCheck, actualCheck);	
+		result &= assert_equal(expectedCheck, actualCheck);
 	}
 
 	// The destructor will be called automatically for stack-allocated objects
@@ -338,14 +326,14 @@ void testRemoveHead_5Element()
 	tearDown(result);
 }
 
-// Test Case 5a - removeTail 1 Element 
+// Test Case 5a - removeTail 1 Element
 void testRemoveTail_1Element()
 {
 	printf("\n=== testRemoveTail_1Element() ===\n");
 	bool result = true; // true;
 
 	objPos currentPos;
-	objPos samplePos(2, 5, 'a');  
+	objPos samplePos(2, 5, 'a');
 
 	// Insert 1 sample element
 	objPosArrayList thisList;
@@ -355,7 +343,7 @@ void testRemoveTail_1Element()
 
 	int expectedSize = 0;
 	int actualSize = thisList.getSize();
-		
+
 	// First check the list size is 1
 	result &= assert_equal(expectedSize, actualSize);
 
@@ -364,14 +352,14 @@ void testRemoveTail_1Element()
 	tearDown(result);
 }
 
-// Test Case 5b - removeTail 5 Element 
+// Test Case 5b - removeTail 5 Element
 void testRemoveTail_5Element()
 {
 	printf("\n=== testRemoveTail_5Element() ===\n");
 	bool result = true; // true;
 
 	objPos currentPos;
-	objPos bodyPos(2, 5, 'a');  
+	objPos bodyPos(2, 5, 'a');
 	objPos tailPos(3, 3, 'm');
 
 	// Insert 4 body elements, then 1 unique head element
@@ -386,7 +374,7 @@ void testRemoveTail_5Element()
 
 	int expectedSize = 4;
 	int actualSize = thisList.getSize();
-		
+
 	// Confirm the list size is now 4
 	result &= assert_equal(expectedSize, actualSize);
 
@@ -400,12 +388,12 @@ void testRemoveTail_5Element()
 	result &= assert_equal(expectedCheck, actualCheck);
 
 	// Next, chech the body elements at index 1, 2, and 3.
-	for(int i = 0; i < actualSize - 1; i++)
+	for (int i = 0; i < actualSize - 1; i++)
 	{
 		currentPos = thisList.getElement(i);
 		actualCheck = bodyPos.isPosEqual(&currentPos);
 
-		result &= assert_equal(expectedCheck, actualCheck);	
+		result &= assert_equal(expectedCheck, actualCheck);
 	}
 
 	// The destructor will be called automatically for stack-allocated objects
@@ -413,118 +401,121 @@ void testRemoveTail_5Element()
 	tearDown(result);
 }
 
-
-
-
 //===========================================================
-	bool runAllTests(int argc, char const *argv[]) {
-		
-		testConstructor();
+bool runAllTests(int argc, char const *argv[])
+{
 
-		testInsertHead_1Element();
-		testInsertHead_5Element();
+	testConstructor();
 
-		testInsertTail_1Element();
-		testInsertTail_5Element();
+	testInsertHead_1Element();
+	testInsertHead_5Element();
 
-		testRemoveHead_1Element();
-		testRemoveHead_5Element();
+	testInsertTail_1Element();
+	testInsertTail_5Element();
 
-		testRemoveTail_1Element();
-		testRemoveTail_5Element();
-		
-		return (successCount == totalAssertions);
-	}
+	testRemoveHead_1Element();
+	testRemoveHead_5Element();
 
-int main(int argc, char const *argv[]) {
-  		
+	testRemoveTail_1Element();
+	testRemoveTail_5Element();
+
+	return (successCount == totalAssertions);
+}
+
+int main(int argc, char const *argv[])
+{
+
 	bool testResult = false;
 	successCount = 0;
 	passCount = 0;
-    totalAssertions = 0;
-    totalTestCases = 0;
-    	
+	totalAssertions = 0;
+	totalTestCases = 0;
+
 	testResult = runAllTests(argc, argv);
 
-	cout << endl << "=== Array List Test Report ===";
-	if(testResult)	cout << endl << "Passed All Tests" << endl; 
-	else			cout << endl << "Failed Tests, Check Failure" << endl;
+	cout << endl
+		 << "=== Array List Test Report ===";
+	if (testResult)
+		cout << endl
+			 << "Passed All Tests" << endl;
+	else
+		cout << endl
+			 << "Failed Tests, Check Failure" << endl;
 
 	cout << "Test Case Result: " << passCount << " / " << totalTestCases << endl;
-	cout << "Assertion Result: " << successCount << " / " << totalAssertions << endl << endl;		
+	cout << "Assertion Result: " << successCount << " / " << totalAssertions << endl
+		 << endl;
 
-	
-	return testResult? EXIT_SUCCESS : EXIT_FAILURE;
+	return testResult ? EXIT_SUCCESS : EXIT_FAILURE;
 }
-    
+
 bool assert_equal(int a, int b)
 {
 	bool result = (a == b);
-	if(result)	
+	if (result)
 		successCount++;
 	else
 	{
-		cout << "\t\t[ASSERTION] Expected: " << a << ", but Actual: " << b << endl;	
+		cout << "\t\t[ASSERTION] Expected: " << a << ", but Actual: " << b << endl;
 	}
 
-    totalAssertions++;
+	totalAssertions++;
 	return result;
 }
 
 bool assert_equal(char a, char b)
 {
 	bool result = (a == b);
-	if(result)	
+	if (result)
 		successCount++;
 	else
 	{
 		cout << "\t\t[ASSERTION] Expected: " << a << ", but Actual: " << b << endl;
 	}
 
-    totalAssertions++;
+	totalAssertions++;
 	return result;
 }
 
 bool assert_equal(string a, string b)
 {
-	bool result = (a == b); 
-	if(result)	
+	bool result = (a == b);
+	if (result)
 		successCount++;
 	else
 	{
 		cout << "\t\t[ASSERTION] Expected: " << a << ", but Actual: " << b << endl;
 	}
 
-    totalAssertions++;
+	totalAssertions++;
 	return result;
 }
-
 
 bool assert_equal(double a, double b, double tolRange)
 {
 	bool result = ((a <= (b + tolRange)) && (a >= (b - tolRange)));
-	if(result)	
+	if (result)
 		successCount++;
 	else
 	{
 		cout << "\t\t[ASSERTION] Expected: " << a << ", but Actual: " << b << endl;
 	}
 
-    totalAssertions++;
+	totalAssertions++;
 	return result;
 }
 
 void tearDown(bool result)
 {
-    totalTestCases++;
-    
-    if(result) 
-    {
-        passCount++;
-        cout << "Passed" << endl;
-    }
-    else
-    {
-        cout << "!!! FAILED !!!" << endl;
-    }
+	totalTestCases++;
+
+	if (result)
+	{
+		passCount++;
+		cout << "Passed" << endl;
+	}
+	else
+	{
+		cout << "!!! FAILED !!!" << endl;
+	}
 }
