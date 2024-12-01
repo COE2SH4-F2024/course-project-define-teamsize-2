@@ -1,5 +1,5 @@
 #include "GameMechs.h"
-
+#include <stdlib.h>
 #include <time.h>
 
 GameMechs::GameMechs()
