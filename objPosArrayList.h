@@ -15,6 +15,8 @@ private:
 public:
     objPosArrayList();
     ~objPosArrayList();
+    objPosArrayList(const objPosArrayList& d);
+    objPosArrayList& operator=(const objPosArrayList& d);
 
     int getSize() const;
     void insertHead(objPos thisPos);
@@ -25,6 +27,7 @@ public:
     objPos getHeadElement() const;
     objPos getTailElement() const;
     objPos getElement(int index) const;
+
 };
 
 #endif
