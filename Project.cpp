@@ -96,10 +96,9 @@ void DrawScreen(void)
     MacUILib_printf("\nScore: %d\n", mainGameMechsRef->getScore());
 
     if (mainGameMechsRef->getExitFlagStatus() && mainGameMechsRef->getLoseFlagStatus())
-        MacUILib_printf("You have lost!\n");
+        MacUILib_printf("\nYou have lost!\n");
     else if (mainGameMechsRef->getExitFlagStatus())
-        MacUILib_printf("You are Exiting the Game without Winning\n");
-
+        MacUILib_printf("\nGame exited\n");
 }
 
 void LoopDelay(void)

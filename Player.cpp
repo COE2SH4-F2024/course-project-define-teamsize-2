@@ -75,74 +75,47 @@ void Player::movePlayer()
 {
     // PPA3 Finite State Machine logic
     int nextPosX, nextPosY, currPosX = playerPosList->getHeadElement().pos->x, currPosY = playerPosList->getHeadElement().pos->y;
+    int X, Y = 0;
 
-    if (myDir == UP)
+    if (myDir != STOP)
     {
-        nextPosY = --currPosY;
-        if (nextPosY == 0)
-            nextPosY = mainGameMechsRef->getBoardSizeY() - 2;
-
-        objPos newHead(currPosX, nextPosY, '*');
-
-        if (checkFoodConsumption())
+        if (myDir == UP)
         {
-            increasePlayerLength();
-            mainGameMechsRef->incrementScore();
-            mainGameMechsRef->generateFood(playerPosList);
+            nextPosY = --currPosY;
+            if (nextPosY == 0)
+                nextPosY = mainGameMechsRef->getBoardSizeY() - 2;
         }
-        else
+        else if (myDir == DOWN)
         {
-            playerPosList->insertHead(newHead);
-            playerPosList->removeTail();
+            nextPosY = ++currPosY;
+            if (nextPosY == mainGameMechsRef->getBoardSizeY() - 1)
+                nextPosY = 1;
         }
-    }
-    else if (myDir == DOWN)
-    {
-        nextPosY = ++currPosY;
-        if (nextPosY == mainGameMechsRef->getBoardSizeY() - 1)
-            nextPosY = 1;
-
-        objPos newHead(currPosX, nextPosY, '*');
-
-        if (checkFoodConsumption())
+        else if (myDir == LEFT)
         {
-            increasePlayerLength();
-            mainGameMechsRef->incrementScore();
-            mainGameMechsRef->generateFood(playerPosList);
+            nextPosX = --currPosX;
+            if (nextPosX == 0)
+                nextPosX = mainGameMechsRef->getBoardSizeX() - 2;
         }
-        else
+        else if (myDir == RIGHT)
         {
-            playerPosList->insertHead(newHead);
-            playerPosList->removeTail();
+            nextPosX = ++currPosX;
+            if (nextPosX == mainGameMechsRef->getBoardSizeX() - 1)
+                nextPosX = 1;
         }
-    }
-    else if (myDir == LEFT)
-    {
-        nextPosX = --currPosX;
-        if (nextPosX == 0)
-            nextPosX = mainGameMechsRef->getBoardSizeX() - 2;
 
-        objPos newHead(nextPosX, currPosY, '*');
-
-        if (checkFoodConsumption())
+        if (myDir == UP || myDir == DOWN)
         {
-            increasePlayerLength();
-            mainGameMechsRef->incrementScore();
-            mainGameMechsRef->generateFood(playerPosList);
+            X = currPosX;
+            Y = nextPosY;
         }
-        else
+        else if (myDir == LEFT || myDir == RIGHT)
         {
-            playerPosList->insertHead(newHead);
-            playerPosList->removeTail();
+            X = nextPosX;
+            Y = currPosY;
         }
-    }
-    else if (myDir == RIGHT)
-    {
-        nextPosX = ++currPosX;
-        if (nextPosX == mainGameMechsRef->getBoardSizeX() - 1)
-            nextPosX = 1;
 
-        objPos newHead(nextPosX, currPosY, '*');
+        objPos newHead(X, Y, '*');
 
         if (checkFoodConsumption())
         {
@@ -157,7 +130,8 @@ void Player::movePlayer()
         }
     }
 
-    if (checkSelfCollision()){
+    if (checkSelfCollision())
+    {
         mainGameMechsRef->setExitTrue();
         mainGameMechsRef->setLoseFlag();
     }
@@ -184,11 +158,11 @@ void Player::increasePlayerLength()
 
 bool Player::checkSelfCollision()
 {
-    for (int i = playerPosList->getSize(); i>1;i--){
+    for (int i = playerPosList->getSize(); i > 1; i--)
+    {
         if (playerPosList->getHeadElement().pos->x == playerPosList->getElement(i).pos->x && playerPosList->getHeadElement().pos->y == playerPosList->getElement(i).pos->y)
             return true;
     }
-
 
     return false;
 }
