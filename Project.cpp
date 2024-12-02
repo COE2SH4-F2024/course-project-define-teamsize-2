@@ -105,7 +105,6 @@ void LoopDelay(void)
 
 void CleanUp(void)
 {
-    MacUILib_clearScreen();
 
     MacUILib_uninit();
 
