@@ -84,17 +84,29 @@ void GameMechs::clearInput()
 }
 
 // More methods should be added here
-void GameMechs::generateFood(objPos blockoff)
+void GameMechs::generateFood(objPosArrayList *blockoff)
 {
     srand(time(NULL));
 
     int randX, randY;
+    bool overlap;
 
     do
     {
-        randX = (rand() % (boardSizeX - 2)) + 1;
-        randY = (rand() % (boardSizeY - 2)) + 1;
-    } while (randX == blockoff.pos->x && randY == blockoff.pos->y);
+        randX = rand() % (boardSizeX - 2) + 1;
+        randY = rand() % (boardSizeY - 2) + 1;
+        overlap = false;
+
+        // Check for overlap with any element in the playerPosList
+        for (int i = 0; i < blockoff->getSize(); ++i)
+        {
+            if (blockoff->getElement(i).pos->x == randX && blockoff->getElement(i).pos->y == randY)
+            {
+                overlap = true;
+                break;
+            }
+        }
+    } while (overlap);
 
     food.pos->x = randX;
     food.pos->y = randY;

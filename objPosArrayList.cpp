@@ -14,22 +14,32 @@ objPosArrayList::~objPosArrayList()
     delete[] aList;
 }
 
-objPosArrayList::objPosArrayList(const objPosArrayList& d) {
+objPosArrayList::objPosArrayList(const objPosArrayList &d)
+{
     listSize = d.listSize;
     arrayCapacity = d.arrayCapacity;
+
     aList = new objPos[arrayCapacity];
-    for (int i = 0; i < listSize; ++i) {
+
+    for (int i = 0; i < listSize; ++i)
+    {
         aList[i] = d.aList[i];
     }
 }
 
-objPosArrayList& objPosArrayList::operator=(const objPosArrayList& d) {
-    if (this != &d) {
+objPosArrayList &objPosArrayList::operator=(const objPosArrayList &d)
+{
+    if (this != &d)
+    {
         delete[] aList;
+
         listSize = d.listSize;
         arrayCapacity = d.arrayCapacity;
+
         aList = new objPos[arrayCapacity];
-        for (int i = 0; i < listSize; ++i) {
+
+        for (int i = 0; i < listSize; ++i)
+        {
             aList[i] = d.aList[i];
         }
     }
@@ -43,7 +53,7 @@ int objPosArrayList::getSize() const
 
 void objPosArrayList::insertHead(objPos thisPos)
 {
-    if (listSize < arrayCapacity && listSize !=0)
+    if (listSize < arrayCapacity && listSize != 0)
     {
         for (int i = listSize; i > 0; i--)
         {
@@ -55,7 +65,7 @@ void objPosArrayList::insertHead(objPos thisPos)
     }
     else if (listSize == 0)
     {
-        aList[0]=thisPos;
+        aList[0] = thisPos;
         listSize++;
     }
 }
