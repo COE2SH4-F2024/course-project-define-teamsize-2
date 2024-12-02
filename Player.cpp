@@ -9,10 +9,6 @@ Player::Player(GameMechs *thisGMRef)
 
     // more actions to be included
     objPos head((mainGameMechsRef->getBoardSizeX()) / 2, (mainGameMechsRef->getBoardSizeY()) / 2, '*');
-    objPos head2(16, 7, '*');
-    objPos head3(17, 7, '*');
-    playerPosList->insertHead(head3);
-    playerPosList->insertHead(head2);
     playerPosList->insertHead(head);
 }
 
@@ -178,6 +174,58 @@ bool Player::checkFoodConsumption()
 
 void Player::increasePlayerLength()
 {
-    objPos newHead(playerPosList->getHeadElement().pos->x, playerPosList->getHeadElement().pos->y, '*');
-    playerPosList->insertHead(newHead);
+    if (myDir == UP)
+    {
+        if (playerPosList->getHeadElement().pos->y-1 == 0)
+        {
+            objPos newHead(playerPosList->getHeadElement().pos->x, mainGameMechsRef->getBoardSizeY() - 2, '*');
+            playerPosList->insertHead(newHead);
+        }
+        else
+        {
+            objPos newHead(playerPosList->getHeadElement().pos->x, playerPosList->getHeadElement().pos->y-1, '*');
+            playerPosList->insertHead(newHead);
+        }
+        
+    }
+    else if (myDir == DOWN)
+    {
+        if (playerPosList->getHeadElement().pos->y+1 == mainGameMechsRef->getBoardSizeY() - 1)
+        {
+            objPos newHead(playerPosList->getHeadElement().pos->x, 1, '*');
+            playerPosList->insertHead(newHead);
+        }
+        else
+        {
+            objPos newHead(playerPosList->getHeadElement().pos->x, playerPosList->getHeadElement().pos->y+1, '*');
+            playerPosList->insertHead(newHead);
+        }
+    }
+    else if (myDir == RIGHT)
+    {
+        if (playerPosList->getHeadElement().pos->x+1 == mainGameMechsRef->getBoardSizeX() - 1)
+        {
+            objPos newHead(1, playerPosList->getHeadElement().pos->y, '*');
+            playerPosList->insertHead(newHead);
+        }
+        else
+        {
+            objPos newHead(playerPosList->getHeadElement().pos->x+1, playerPosList->getHeadElement().pos->y, '*');
+            playerPosList->insertHead(newHead);
+        }
+    }
+    else if (myDir == LEFT)
+    {
+        if (playerPosList->getHeadElement().pos->x-1 == 0)
+        {
+            objPos newHead(mainGameMechsRef->getBoardSizeX() - 2, playerPosList->getHeadElement().pos->y, '*');
+            playerPosList->insertHead(newHead);
+        }
+        else
+        {
+            objPos newHead(playerPosList->getHeadElement().pos->x-1, playerPosList->getHeadElement().pos->y, '*');
+            playerPosList->insertHead(newHead);
+        }
+    }
+    
 }
