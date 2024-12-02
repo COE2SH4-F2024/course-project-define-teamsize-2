@@ -156,6 +156,11 @@ void Player::movePlayer()
             playerPosList->removeTail();
         }
     }
+
+    if (checkSelfCollision()){
+        mainGameMechsRef->setExitTrue();
+        mainGameMechsRef->setLoseFlag();
+    }
 }
 
 // More methods to be added
@@ -179,4 +184,11 @@ void Player::increasePlayerLength()
 
 bool Player::checkSelfCollision()
 {
+    for (int i = playerPosList->getSize(); i>1;i--){
+        if (playerPosList->getHeadElement().pos->x == playerPosList->getElement(i).pos->x && playerPosList->getHeadElement().pos->y == playerPosList->getElement(i).pos->y)
+            return true;
+    }
+
+
+    return false;
 }
