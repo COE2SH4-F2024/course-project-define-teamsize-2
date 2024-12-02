@@ -77,7 +77,7 @@ void DrawScreen(void)
             }
             else
             {
-                for (int k = 0; k < size; k++)
+                for (int k = 0; k < size && !check; k++)
                 {
                     if (i == currPlayerPos.getElement(k).pos->y && j == currPlayerPos.getElement(k).pos->x)
                     {
