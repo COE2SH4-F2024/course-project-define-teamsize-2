@@ -36,6 +36,8 @@ public:
     bool checkFoodConsumption();
     void increasePlayerLength();
 
+    bool checkSelfCollision();
+
 private:
     objPosArrayList *playerPosList; // Upgrade this in iteration 3.
     enum Dir myDir;
