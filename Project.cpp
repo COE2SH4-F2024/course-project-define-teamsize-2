@@ -9,7 +9,7 @@ using namespace std;
 #define DELAY_CONST 100000
 
 GameMechs *mainGameMechsRef = new GameMechs();
-Player *player = new Player(mainGameMechsRef);;
+Player *player = new Player(mainGameMechsRef);
 
 void Initialize(void);
 void GetInput(void);
@@ -38,12 +38,13 @@ void Initialize(void)
     MacUILib_init();
     MacUILib_clearScreen();
 
-    mainGameMechsRef->generateFood(player->getPlayerPos().getHeadElement());
+    mainGameMechsRef->generateFood(&player->getPlayerPos());
 }
 
 void GetInput(void)
 {
-    if (MacUILib_hasChar() != 0){
+    if (MacUILib_hasChar() != 0)
+    {
         mainGameMechsRef->setInput(MacUILib_getChar());
     }
 }
@@ -52,20 +53,15 @@ void RunLogic(void)
 {
     player->updatePlayerDir();
     player->movePlayer();
-
-     
 }
 
 void DrawScreen(void)
 {
     MacUILib_clearScreen();
-    MacUILib_printf("Drawing: ");
+
     objPosArrayList currPlayerPos = player->getPlayerPos();
     int size = currPlayerPos.getSize();
     int check = 0;
-    
-    MacUILib_printf("%d, %d\n",currPlayerPos.getHeadElement().pos->x,currPlayerPos.getHeadElement().pos->y);
-    MacUILib_printf("%d, %d\n",player->getPlayerPos().getHeadElement().pos->x,player->getPlayerPos().getHeadElement().pos->y);
 
     for (int i = 0; i < mainGameMechsRef->getBoardSizeY(); i++)
     {
@@ -81,21 +77,23 @@ void DrawScreen(void)
             }
             else
             {
-                for (int k = 0; k<size; k++)
+                for (int k = 0; k < size; k++)
                 {
                     if (i == currPlayerPos.getElement(k).pos->y && j == currPlayerPos.getElement(k).pos->x)
                     {
-                        MacUILib_printf("%c",currPlayerPos.getElement(k).symbol);
+                        MacUILib_printf("%c", currPlayerPos.getElement(k).symbol);
                         check = 1;
                     }
                 }
-                if(!check)
+                if (!check)
                     MacUILib_printf("%c", ' ');
             }
             check = 0;
         }
         MacUILib_printf("\n");
     }
+
+    MacUILib_printf("\nScore: %d\n", mainGameMechsRef->getScore());
 }
 
 void LoopDelay(void)

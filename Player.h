@@ -27,14 +27,17 @@ public:
     Player();
     ~Player();
 
-    objPosArrayList& getPlayerPos() const; // Upgrade this in iteration 3.
+    objPosArrayList &getPlayerPos() const; // Upgrade this in iteration 3.
     void updatePlayerDir();
     void movePlayer();
 
     // More methods to be added here
 
+    bool checkFoodConsumption();
+    void increasePlayerLength();
+
 private:
-    objPosArrayList* playerPosList; // Upgrade this in iteration 3.
+    objPosArrayList *playerPosList; // Upgrade this in iteration 3.
     enum Dir myDir;
 
     // Need a reference to the Main Game Mechanisms

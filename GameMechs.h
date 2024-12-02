@@ -43,7 +43,7 @@ public:
     void incrementScore();
 
     // More methods should be added here
-    void generateFood(objPos blockoff);
+    void generateFood(objPosArrayList *blockoff);
     objPos getFoodPos() const;
 };
 
