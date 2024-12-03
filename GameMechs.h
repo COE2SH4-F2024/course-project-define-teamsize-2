@@ -22,19 +22,21 @@ private:
     int boardSizeY;
 
     objPos food;
-    objPosArrayList* foodBucket;
+    objPosArrayList *foodBucket;
 
 public:
     GameMechs();
     GameMechs(int boardX, int boardY);
-    ~GameMechs(); // needed to delete the foodBucket pointer created on the heap
+
+    ~GameMechs(); // Needed to delete the foodBucket pointer created on the heap
 
     bool getExitFlagStatus() const;
     void setExitTrue();
     bool getLoseFlagStatus() const;
     void setLoseFlag();
 
-    //Added Functions to help with the Special Food Objects
+    // Added functions to help with the Special Food Objects
+
     bool getSpecialFood() const;
     void setSpecialFood(bool a);
 
@@ -48,7 +50,6 @@ public:
     int getScore() const;
     void incrementScore();
 
-    // More methods should be added here
     void generateFood(objPosArrayList *blockoff);
     objPosArrayList &getFoodPos() const;
 };

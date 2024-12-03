@@ -24,6 +24,8 @@ GameMechs::GameMechs(int boardX, int boardY)
     specialFood = false;
     score = 0;
     input = '\0';
+
+    foodBucket = new objPosArrayList;
 }
 
 // do you need a destructor?
@@ -98,7 +100,6 @@ void GameMechs::setSpecialFood(bool a)
     specialFood = a;
 }
 
-// More methods should be added here
 void GameMechs::generateFood(objPosArrayList *blockoff)
 {
     delete foodBucket;
@@ -106,57 +107,64 @@ void GameMechs::generateFood(objPosArrayList *blockoff)
     int randX, randY;
     bool overlap;
 
-    for (int k = 0; k < 5; k++){
+    for (int k = 0; k < 5; k++)
+    {
         srand(time(NULL));
 
         int sizeBucket = foodBucket->getSize();
 
-            do
+        do
+        {
+            randX = rand() % (boardSizeX - 2) + 1;
+            randY = rand() % (boardSizeY - 2) + 1;
+            overlap = false;
+
+            // Check for overlap with any element in the playerPosList
+
+            for (int i = 0; i < blockoff->getSize(); ++i)
+            {
+                if (blockoff->getElement(i).pos->x == randX && blockoff->getElement(i).pos->y == randY)
+                {
+                    overlap = true;
+                    break;
+                }
+            }
+        } while (overlap);
+
+        overlap = false; // Reset overlap to false every iteration
+
+        // Make sure multiple food objects do not spawn on the same location
+
+        for (int j = 0; j < sizeBucket; j++)
+        {
+            while (foodBucket->getElement(j).pos->x == randX && foodBucket->getElement(j).pos->y == randY)
             {
                 randX = rand() % (boardSizeX - 2) + 1;
                 randY = rand() % (boardSizeY - 2) + 1;
-                overlap = false;
-
-                // Check for overlap with any element in the playerPosList
-                for (int i = 0; i < blockoff->getSize(); ++i)
-                {
-                    if (blockoff->getElement(i).pos->x == randX && blockoff->getElement(i).pos->y == randY)
-                    {
-                        overlap = true;
-                        break;
-                    }
-                }
-            } while (overlap);
-
-            overlap = false; //Reset overlap to false every iteration
-
-            //Make sure multiple food objects do not spawn on the same location
-            for (int j = 0; j < sizeBucket; j++)
-            {
-                while (foodBucket->getElement(j).pos->x == randX && foodBucket->getElement(j).pos->y == randY)
-                {
-                    randX = rand() % (boardSizeX - 2) + 1;
-                    randY = rand() % (boardSizeY - 2) + 1;
-                }
             }
+        }
 
-            //Randomly Picks whether 1 or 2 "special" food objects are generated
-            int randGen = (rand() % 2);
-            
-            //First food object within foodBucket goes the the head, the rest are inserted to the tail
-            if(k==0){
-                objPos foodGen(randX,randY,'F');
-                foodBucket->insertHead(foodGen);
-            }
-            else if (k==randGen){
-                objPos foodGen(randX,randY,'F');
-                foodBucket->insertTail(foodGen);
-            }
-            else{
-                objPos foodGen(randX,randY,'f');
-                foodBucket->insertTail(foodGen);
-            }
-            
+        // Randomly Picks whether 1 or 2 "special" food objects are generated
+
+        int randGen = (rand() % 2);
+
+        // First food object within the foodBucket goes to the head, the rest are inserted to the tail
+
+        if (k == 0)
+        {
+            objPos foodGen(randX, randY, 'F');
+            foodBucket->insertHead(foodGen);
+        }
+        else if (k == randGen)
+        {
+            objPos foodGen(randX, randY, 'F');
+            foodBucket->insertTail(foodGen);
+        }
+        else
+        {
+            objPos foodGen(randX, randY, 'f');
+            foodBucket->insertTail(foodGen);
+        }
     }
 }
 

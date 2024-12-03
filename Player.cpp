@@ -7,24 +7,20 @@ Player::Player(GameMechs *thisGMRef)
     myDir = STOP;
     playerPosList = new objPosArrayList;
 
-    // more actions to be included
-    objPos head((mainGameMechsRef->getBoardSizeX()) / 2, (mainGameMechsRef->getBoardSizeY()) / 2, '*');
+    objPos head((mainGameMechsRef->getBoardSizeX()) / 2, (mainGameMechsRef->getBoardSizeY()) / 2, '*'); // Initial player head position (approx. middle of the board)
+
     playerPosList->insertHead(head);
 }
 
 Player::~Player()
 {
-    // delete any heap members here
-
     delete mainGameMechsRef;
     delete playerPosList;
 }
 
 objPosArrayList &Player::getPlayerPos() const
 {
-    // return the reference to the playerPos array list
-
-    return *playerPosList;
+    return *playerPosList; // Return the reference to the playerPos array list
 }
 
 void Player::updatePlayerDir()
@@ -74,8 +70,9 @@ void Player::updatePlayerDir()
 void Player::movePlayer()
 {
     // PPA3 Finite State Machine logic
+
     int nextPosX, nextPosY, currPosX = playerPosList->getHeadElement().pos->x, currPosY = playerPosList->getHeadElement().pos->y;
-    int X, Y = 0;
+    int X, Y = 0; // X and Y are the coordinates of the next head position
 
     if (myDir != STOP)
     {
@@ -115,14 +112,15 @@ void Player::movePlayer()
             Y = currPosY;
         }
 
-        objPos newHead(X, Y, '*');
+        objPos newHead(X, Y, '*'); // New player head position
 
         if (checkFoodConsumption())
         {
             if (mainGameMechsRef->getSpecialFood())
             {
-                for(int i = 0; i<10; i++)
+                for (int i = 0; i < 2; i++)
                     mainGameMechsRef->incrementScore();
+
                 mainGameMechsRef->setSpecialFood(false);
                 mainGameMechsRef->generateFood(playerPosList);
             }
@@ -147,17 +145,16 @@ void Player::movePlayer()
     }
 }
 
-// More methods to be added
-
 bool Player::checkFoodConsumption()
 {
     objPosArrayList foodPos = mainGameMechsRef->getFoodPos();
     objPos playerHead = playerPosList->getHeadElement();
 
-    for (int i = 0; i<foodPos.getSize();i++){
+    for (int i = 0; i < foodPos.getSize(); i++)
+    {
         if (foodPos.getElement(i).pos->x == playerHead.pos->x && foodPos.getElement(i).pos->y == playerHead.pos->y)
         {
-            if(foodPos.getElement(i).symbol == 'F')
+            if (foodPos.getElement(i).symbol == 'F')
                 mainGameMechsRef->setSpecialFood(true);
             return true;
         }
@@ -173,7 +170,7 @@ void Player::increasePlayerLength()
 
 bool Player::checkSelfCollision()
 {
-    for (int i = playerPosList->getSize(); i > 1; i--)
+    for (int i = playerPosList->getSize(); i > 1; i--) // Iterate through the playerPosList starting from the tail going to the head
     {
         if (playerPosList->getHeadElement().pos->x == playerPosList->getElement(i).pos->x && playerPosList->getHeadElement().pos->y == playerPosList->getElement(i).pos->y)
             return true;

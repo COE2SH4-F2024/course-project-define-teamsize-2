@@ -1,7 +1,5 @@
 #include "objPosArrayList.h"
 
-// Paste your Tested implementation here.
-
 objPosArrayList::objPosArrayList()
 {
     listSize = 0;
@@ -31,7 +29,7 @@ objPosArrayList &objPosArrayList::operator=(const objPosArrayList &d)
 {
     if (this != &d)
     {
-        delete[] aList;
+        delete[] aList; // Deallocate memory before assigning new memory
 
         listSize = d.listSize;
         arrayCapacity = d.arrayCapacity;
@@ -53,9 +51,9 @@ int objPosArrayList::getSize() const
 
 void objPosArrayList::insertHead(objPos thisPos)
 {
-    if (listSize < arrayCapacity && listSize != 0)
+    if (listSize < arrayCapacity && listSize != 0) // If the list is not empty
     {
-        for (int i = listSize; i > 0; i--)
+        for (int i = listSize; i > 0; i--) // Shift all elements to the right
         {
             aList[i] = aList[i - 1];
         }
@@ -72,7 +70,7 @@ void objPosArrayList::insertHead(objPos thisPos)
 
 void objPosArrayList::insertTail(objPos thisPos)
 {
-    if (listSize < arrayCapacity)
+    if (listSize < arrayCapacity) // If the list is not full
     {
         aList[listSize] = thisPos;
         listSize++;
@@ -83,7 +81,7 @@ void objPosArrayList::removeHead()
 {
     if (listSize > 0)
     {
-        for (int i = 0; i < listSize - 1; i++)
+        for (int i = 0; i < listSize - 1; i++) // Shift all elements to the left
         {
             aList[i] = aList[i + 1];
         }

@@ -18,12 +18,9 @@ public:
     objPos();
     objPos(int xPos, int yPos, char sym);
 
-    // Respect the rule of six / minimum four
-    // [TODO] Implement the missing special member functions to meet the minimum four rule
-
-    ~objPos();                          // Destructor
-    objPos(const objPos &d);            // Copy constructor
-    objPos &operator=(const objPos &d); // Copy assignment operator
+    ~objPos();
+    objPos(const objPos &d);
+    objPos &operator=(const objPos &d);
 
     void setObjPos(objPos o);
     void setObjPos(int xPos, int yPos, char sym);
