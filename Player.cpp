@@ -119,9 +119,19 @@ void Player::movePlayer()
 
         if (checkFoodConsumption())
         {
-            increasePlayerLength();
-            mainGameMechsRef->incrementScore();
-            mainGameMechsRef->generateFood(playerPosList);
+            if (mainGameMechsRef->getSpecialFood())
+            {
+                for(int i = 0; i<10; i++)
+                    mainGameMechsRef->incrementScore();
+                mainGameMechsRef->setSpecialFood(false);
+                mainGameMechsRef->generateFood(playerPosList);
+            }
+            else
+            {
+                increasePlayerLength();
+                mainGameMechsRef->incrementScore();
+                mainGameMechsRef->generateFood(playerPosList);
+            }
         }
         else
         {
@@ -141,13 +151,18 @@ void Player::movePlayer()
 
 bool Player::checkFoodConsumption()
 {
-    objPos foodPos = mainGameMechsRef->getFoodPos();
+    objPosArrayList foodPos = mainGameMechsRef->getFoodPos();
     objPos playerHead = playerPosList->getHeadElement();
 
-    if (foodPos.pos->x == playerHead.pos->x && foodPos.pos->y == playerHead.pos->y)
-        return true;
-    else
-        return false;
+    for (int i = 0; i<foodPos.getSize();i++){
+        if (foodPos.getElement(i).pos->x == playerHead.pos->x && foodPos.getElement(i).pos->y == playerHead.pos->y)
+        {
+            if(foodPos.getElement(i).symbol == 'F')
+                mainGameMechsRef->setSpecialFood(true);
+            return true;
+        }
+    }
+    return false;
 }
 
 void Player::increasePlayerLength()

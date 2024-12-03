@@ -15,22 +15,28 @@ private:
     char input;
     bool exitFlag;
     bool loseFlag;
+    bool specialFood;
     int score;
 
     int boardSizeX;
     int boardSizeY;
 
     objPos food;
+    objPosArrayList* foodBucket;
 
 public:
     GameMechs();
     GameMechs(int boardX, int boardY);
-    ~GameMechs(); // is this one needed at all? Why or why not?
+    ~GameMechs(); // needed to delete the foodBucket pointer created on the heap
 
     bool getExitFlagStatus() const;
     void setExitTrue();
     bool getLoseFlagStatus() const;
     void setLoseFlag();
+
+    //Added Functions to help with the Special Food Objects
+    bool getSpecialFood() const;
+    void setSpecialFood(bool a);
 
     char getInput() const;
     void setInput(char this_input);
@@ -44,7 +50,7 @@ public:
 
     // More methods should be added here
     void generateFood(objPosArrayList *blockoff);
-    objPos getFoodPos() const;
+    objPosArrayList &getFoodPos() const;
 };
 
 #endif

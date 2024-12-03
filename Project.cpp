@@ -37,7 +37,7 @@ void Initialize(void)
 {
     MacUILib_init();
     MacUILib_clearScreen();
-
+    
     mainGameMechsRef->generateFood(&player->getPlayerPos());
 }
 
@@ -60,7 +60,9 @@ void DrawScreen(void)
     MacUILib_clearScreen();
 
     objPosArrayList currPlayerPos = player->getPlayerPos();
+    objPosArrayList foodBucket = mainGameMechsRef->getFoodPos();
     int size = currPlayerPos.getSize();
+    int foodSize = foodBucket.getSize();
     int check = 0;
 
     for (int i = 0; i < mainGameMechsRef->getBoardSizeY(); i++)
@@ -71,12 +73,16 @@ void DrawScreen(void)
             {
                 MacUILib_printf("%c", '#');
             }
-            else if (i == mainGameMechsRef->getFoodPos().pos->y && j == mainGameMechsRef->getFoodPos().pos->x)
-            {
-                MacUILib_printf("%c", mainGameMechsRef->getFoodPos().symbol);
-            }
             else
             {
+                for (int l = 0; l < foodSize && !check; l++)
+                {
+                    if (i == foodBucket.getElement(l).pos->y && j == foodBucket.getElement(l).pos->x)
+                    {
+                        MacUILib_printf("%c", foodBucket.getElement(l).symbol);
+                        check = 1;
+                    }
+                }
                 for (int k = 0; k < size && !check; k++)
                 {
                     if (i == currPlayerPos.getElement(k).pos->y && j == currPlayerPos.getElement(k).pos->x)
@@ -94,6 +100,7 @@ void DrawScreen(void)
     }
 
     MacUILib_printf("\nScore: %d\n", mainGameMechsRef->getScore());
+    MacUILib_printf("f is normal food\nF is special food - Increases Score by 10 without increasing the length\n");
 
     if (mainGameMechsRef->getExitFlagStatus() && mainGameMechsRef->getLoseFlagStatus())
         MacUILib_printf("\nYou have lost!\n");
@@ -104,6 +111,7 @@ void DrawScreen(void)
 void LoopDelay(void)
 {
     MacUILib_Delay(DELAY_CONST); // 0.1s delay
+
 }
 
 void CleanUp(void)
